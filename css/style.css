@@ -1,0 +1,109 @@
+/*
+    Copyright (c) Maximilian Köstler
+    3-clause BSD license
+    https://license.koestler.hamburg
+*/
+
+body {
+    color:            var(--primary-color);
+    background-color: var(--background-color);
+    font-family:      var(--main-font-family);
+    font-size:        14px;
+    margin:           0px;
+}
+
+label.error {
+    color:     var(--error-color);
+    font-size: 10px;
+}
+
+div.container {
+    padding: 15px;
+}
+
+div.component {
+    float: left;
+}
+
+div#top-bar {
+    border-bottom-style: solid;
+    border-color:        var(--primary-color);
+    border-width:        2px;
+
+    overflow:            auto;
+}
+
+div#bar-element-left {
+    float: left;
+}
+
+div#bar-element-right {
+    float: right;
+}
+
+a#theme {
+    cursor: pointer;
+    font-size: 21px;
+}
+
+a#theme:after {
+    content: var(--switch-theme-symbol);
+}
+
+form.vertical > input {
+    margin-right: 15px;
+}
+
+input, button {
+    font-family:        inherit;
+    font-size:          inherit;
+
+    color:              var(--primary-color);
+    background-color:   var(--highlight-background-color);
+
+    border-color:       var(--primary-color);
+    border-width:       1px;
+}
+
+input {
+    padding:      0.2em;
+    border-style: none none dashed none;
+}
+
+span.selected {
+    color: var(--highlight-color);
+}
+
+input.invalid {
+    background-color: var(--invalid-background-color);
+}
+
+input.syncing {
+    background-color: var(--syncing-background-color);
+}
+
+span.module-handle {
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    padding:      0.2em 0.5em 0.2em 0.5em;
+    border-style: solid;
+}
+
+table#parameter-table > tr >td {
+    padding-right:  2em;
+    height:         28px;
+}
+
+.type {
+    color: var(--type-color);
+}
+
+.variable {
+    color: var(--variable-color);
+}
+
+.keyword {
+    color: var(--keyword-color);
+}

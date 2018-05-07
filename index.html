@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+	Copyright (c) Maximilian Köstler
+	3-clause BSD license
+	https://license.koestler.hamburg
+-->
+<html>
+<head>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link id="theme-stylesheet" rel="stylesheet" type="text/css" href="css/theme-dark.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script src="lib/autobahn.min.js"></script>
+	<script src="lib/jquery-3.2.1.min.js"></script>
+	<script src="lib/jquery.validate.min.js"></script>
+
+	<script src="script/validation-rules.js"></script>
+	<script src="script/parameter-parser.js"></script>
+	<script src="script/type-formatter.js"></script>
+	<script src="script/script.js"></script>
+
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+	<title>OMNeT++ Live Interface</title>
+</head>
+
+<body>
+	<div id="top-bar" class="container">
+		<div id="bar-element-left">
+			<form id="connection" class="vertical" method="post">
+				<label>Host:</label>
+				<input type="text"  name="host" size="20" value="localhost" placeholder="localhost">
+				<label>Port:</label>
+				<input type="text" name="port" size="6" value="9000" placeholder="9000">
+				<label>Realm:</label>
+				<input type="text" name="realm" size="20" value="opplive" placeholder="opplive">
+				<input type="submit" value="Connect">
+			</form>
+		</div>
+		<div id="bar-element-right">
+			<a id="theme"></a>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="component" style="min-width: 50%;">
+			<h1>Modules</h1>
+			<div id="module-tree"></div>
+		</div>
+		<div class="component">
+			<h1>Parameters</h1>
+			<table id="parameter-table">
+			</table>
+		</div>
+	</div>
+
+	<script>
+		var form = $('form#connection');
+
+		form.validate({
+			rules: {
+				host: {
+					required: true,
+					host: true
+				},
+				port: {
+					required: true,
+					digits: true,
+					port: true
+				},
+				realm: {
+					required: true,
+					realm: true
+				}
+			},
+			submitHandler: function(f) {
+				var host  = $('[name="host"]').val();
+				var port  = $('[name="port"]').val();
+				var realm = $('[name="realm"]').val();
+
+				var url = 'ws://' + host + ':' + port + '/ws';
+				console.log('Connecting to realm "' + realm + '" on "' + url + '"');
+
+				connect(url, realm);
+			}
+		});
+
+		$('#theme').click(function(event) {
+			var theme = $('#theme-stylesheet');
+			var current_theme = theme.attr('href');
+			if (current_theme === 'css/theme-light.css') {
+				current_theme = 'css/theme-dark.css';
+			} else {
+				current_theme = 'css/theme-light.css';
+			}
+			theme.attr('href', current_theme);
+		});
+	</script>
+</body>
+</html>
